@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'antd';
 import './styles.scss';
 class List extends Component {
   constructor(props) {
@@ -13,17 +14,32 @@ class List extends Component {
       case 3:
       return (<i role='copper' />);
       default:
-      return rank;
+      return <span className="rank">{rank}</span>;
     }
   }
+  // renderList = () => {
+  //   const { dataSource } = this.props;
+  //   if (Array.isArray(dataSource) && dataSource.length > 0) {
+  //     return dataSource.map((d,i) => (
+  //       <li className="sr-list-item" key={i}>
+  //         <div>{d.name}</div>
+  //         <div>{d.step}步</div>
+  //         <div>{this.setRank(d.rank)}</div>
+  //       </li>
+  //     ))
+  //   }
+  //   return null;
+  // }
   renderList = () => {
     const { dataSource } = this.props;
     if (Array.isArray(dataSource) && dataSource.length > 0) {
       return dataSource.map((d,i) => (
         <li className="sr-list-item" key={i}>
-          <div>{d.name}</div>
-          <div>{d.step}步</div>
-          <div>{this.setRank(d.rank)}</div>
+          <Row>
+            <Col span={7}>{d.name}</Col>
+            <Col span={10}>{d.step}步</Col>
+            <Col span={7}>{this.setRank(d.rank)}</Col>
+          </Row>
         </li>
       ))
     }
@@ -34,9 +50,9 @@ class List extends Component {
       <div className="sr-list">
         <ul>
           <li className="sr-list-item" key={-1}>
-            <div>姓名</div>
-            <div>步数</div>
-            <div>排名</div>
+            <Col span={7}>姓名</Col>
+            <Col span={10}>步数</Col>
+            <Col span={7}>排名</Col>
           </li>
           {this.renderList()}
         </ul>

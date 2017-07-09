@@ -6,13 +6,13 @@ import Title from './title';
 import List from './list';
 
 const data = [
-    {name: '赵勇',step: 1000, rank: 1},
-    {name: '赵勇',step: 1000, rank: 2},
-    {name: '赵勇',step: 1000, rank: 3},
-    {name: '赵勇',step: 1000, rank: 4},
+    {name: '赵勇',step: 3000, rank: 1},
+    {name: '赵勇',step: 2600, rank: 2},
+    {name: '赵勇',step: 2100, rank: 3},
+    {name: '赵勇',step: 1800, rank: 4},
     {name: '赵勇',step: 1000, rank: 5},
-    {name: '赵勇',step: 1000, rank: 6},
-    {name: '赵勇',step: 1000, rank: 7},
+    {name: '赵勇',step: 800, rank: 6},
+    {name: '赵勇',step: 600, rank: 7},
     {name: '赵勇',step: 1000, rank: 8},
     {name: '赵勇',step: 1000, rank: 9}
     ];
@@ -25,7 +25,7 @@ class AppComponent extends React.Component {
           <div className="cup-box">
             <div className="top">
               <div className="cup cup-gold">
-                <div>
+                <div className="frist">
                   <span>贾永宁</span>
                   <span>27862步</span>
                 </div>
@@ -35,15 +35,15 @@ class AppComponent extends React.Component {
               <div className="bottom-left">
                 <div className="cup cup-silver">
                  <div>
-                  <span>贾永宁</span>
-                  <span>27862步</span>
-                 </div>                 
+                    <span>王喜东</span>
+                    <span>27862步</span>
+                   </div>                
                 </div>
               </div>
               <div className="bottom-right">
                 <div className="cup cup-copper">
                   <div>
-                    <span>贾永宁</span>
+                    <span>王喜东</span>
                     <span>27862步</span>
                    </div>
                 </div>
@@ -67,8 +67,5 @@ class AppComponent extends React.Component {
     );
   }
 }
-
-AppComponent.defaultProps = {
-};
 
 export default AppComponent;

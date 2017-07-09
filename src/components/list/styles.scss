@@ -32,7 +32,14 @@
       background-color: #6cb3ff;
       line-height: 50px;
       color: #fff;
+      font-size: 18px;
+      font-weight: 300;
       text-align: center;
+    }
+    .rank {
+      position: absolute;
+      right: 14px;
+      font-size: 20px;
     }
   }
 }
