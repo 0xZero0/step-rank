@@ -1,17 +1,68 @@
 require('normalize.css/normalize.css');
-require('styles/App.css');
+import 'styles/index.scss';
 
 import React from 'react';
+import Title from './title';
+import List from './list';
 
-let yeomanImage = require('../images/yeoman.png');
-
+const data = [
+    {name: '赵勇',step: 1000, rank: 1},
+    {name: '赵勇',step: 1000, rank: 2},
+    {name: '赵勇',step: 1000, rank: 3},
+    {name: '赵勇',step: 1000, rank: 4},
+    {name: '赵勇',step: 1000, rank: 5},
+    {name: '赵勇',step: 1000, rank: 6},
+    {name: '赵勇',step: 1000, rank: 7},
+    {name: '赵勇',step: 1000, rank: 8},
+    {name: '赵勇',step: 1000, rank: 9}
+    ];
 class AppComponent extends React.Component {
   render() {
     return (
-      <div className="index">
-        <h1>走步排名</h1>
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
+      <div className="sr-containter">
+        <div className="sr-containter-left">
+          <Title title="昨日排名" />
+          <div className="cup-box">
+            <div className="top">
+              <div className="cup cup-gold">
+                <div>
+                  <span>贾永宁</span>
+                  <span>27862步</span>
+                </div>
+              </div>
+            </div>
+            <div className="bottom">
+              <div className="bottom-left">
+                <div className="cup cup-silver">
+                 <div>
+                  <span>贾永宁</span>
+                  <span>27862步</span>
+                 </div>                 
+                </div>
+              </div>
+              <div className="bottom-right">
+                <div className="cup cup-copper">
+                  <div>
+                    <span>贾永宁</span>
+                    <span>27862步</span>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="sr-containter-right">
+           <Title title="教师日排名" />
+           <List dataSource={data}  />
+        </div>
+        <div className="sr-containter-right">
+           <Title title="教师周排名" />
+           <List dataSource={data}  />
+        </div>
+        <div className="sr-containter-right">
+           <Title title="教师月排名" />
+           <List dataSource={data}  />
+        </div>
       </div>
     );
   }
