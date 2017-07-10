@@ -22,6 +22,6 @@
         "**/.git",
         "**/.DS_Store",
         "**/.sftpConfig.json",
-        "node_modules"
+        "**/node_modules"
     ]
 }
