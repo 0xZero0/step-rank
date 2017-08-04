@@ -1,26 +1,39 @@
 require('normalize.css/normalize.css');
 import 'styles/index.scss';
-import fetchAjax from 'lib/fetch';
+import request from 'lib/fetch';
 import React from 'react';
 import Title from './title';
 import List from './list';
+import Cup from './cup';
 
-const data = [
-    {name: '赵勇',step: 3000, rank: 1},
-    {name: '赵勇',step: 2600, rank: 2},
-    {name: '赵勇',step: 2100, rank: 3},
-    {name: '赵勇',step: 1800, rank: 4},
-    {name: '赵勇',step: 1000, rank: 5},
-    {name: '赵勇',step: 800, rank: 6},
-    {name: '赵勇',step: 600, rank: 7},
-    {name: '赵勇',step: 1000, rank: 8},
-    {name: '赵勇',step: 1000, rank: 9}
-    ];
 class AppComponent extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      yestdayList: [],
+      dayList: [],
+      weekList: [],
+      mounth: []
+    }
+  }
   componentWillMount() {
-    // const url = 'http://schoolinkapi.ezooo.cn:81/API/Steps/GetStepRanksByDay.ashx';
-    // const url = 'http://schoolinkapi.ezooo.cn:81/API/Steps/GetStepRanksByDay.ashx?token=8C107BD0CADD409AB5CE76B89714A475&personType=1&schoolGuid=F7127394-40A3-4934-9D8E-BDA27BA0AC78&date=2016-12-27&pageSize=10'
-   const url = 'http://localhost:3000/steps/day'
+    this.fetchDay();
+    this.fetchWeek();
+    this.fetchMouth();
+    this.fetchYestday();
+  }
+  initRankData(list) {
+    if (Array.isArray(list) && list.length) {
+      return list.map(d => ({
+        name: d.UserName,
+        step: d.Steps,
+        rank: Number(d.Ranks)
+      }))
+    }
+    return [];
+  }
+  fetchYestday() {
+    const url = 'http://localhost:3000/steps/day'
     const params = {
       token: '8C107BD0CADD409AB5CE76B89714A475',
       personType: 1,
@@ -28,55 +41,77 @@ class AppComponent extends React.Component {
       date: '2016-12-27',
       pageSize: 10
     }
-    fetchAjax(url, params).then(res => {
-      console.log(res,'00000000000000000');
+    request(url, params).then(res => {
+      console.log('yest',res)
+      if (res.Code == 0) {
+        this.setState({yestdayList: this.initRankData(res.List)})
+      }
+    })
+  }
+  fetchDay() {
+    const url = 'http://localhost:3000/steps/day'
+    const params = {
+      token: '8C107BD0CADD409AB5CE76B89714A475',
+      personType: 1,
+      schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
+      date: '2016-12-27',
+      pageSize: 10
+    }
+    request(url, params).then(res => {
+      if (res.Code == 0) {
+        this.setState({dayList: this.initRankData(res.List)})
+      }
+    })
+  }
+  fetchWeek() {
+    const url = 'http://localhost:3000/steps/week'
+    const params = {
+      token: '8C107BD0CADD409AB5CE76B89714A475',
+      personType: 1,
+      schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
+      date: '2016-12-27',
+      pageSize: 10
+    }
+    request(url, params).then(res => {
+      if (res.Code == 0) {
+        this.setState({weekList: this.initRankData(res.List)})
+      }
+    })
+  }
+  fetchMouth() {
+    const url = 'http://localhost:3000/steps/month'
+    const params = {
+      token: '8C107BD0CADD409AB5CE76B89714A475',
+      personType: 1,
+      schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
+      date: '2016-12-27',
+      pageSize: 10
+    }
+    request(url, params).then(res => {
+      if (res.Code == 0) {
+        this.setState({monthList: this.initRankData(res.List)})
+      }
     })
   }
   render() {
+    const {yestdayList, dayList, weekList, monthList } = this.state;
     return (
       <div className="sr-containter">
         <div className="sr-containter-left">
           <Title title="昨日排名" />
-          <div className="cup-box">
-            <div className="top">
-              <div className="cup cup-gold">
-                <div className="frist">
-                  <span>贾永宁</span>
-                  <span>27862步</span>
-                </div>
-              </div>
-            </div>
-            <div className="bottom">
-              <div className="bottom-left">
-                <div className="cup cup-silver">
-                   <div>
-                    <span>王喜东</span>
-                    <span>27862步</span>
-                   </div>                
-                </div>
-              </div>
-              <div className="bottom-right">
-                <div className="cup cup-copper">
-                  <div>
-                    <span>王喜东</span>
-                    <span>27862步</span>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Cup dataSource={yestdayList} />
         </div>
         <div className="sr-containter-right">
            <Title title="教师日排名" />
-           <List dataSource={data}  />
+           <List dataSource={dayList}  />
         </div>
         <div className="sr-containter-right">
            <Title title="教师周排名" />
-           <List dataSource={data}  />
+           <List dataSource={weekList}  />
         </div>
         <div className="sr-containter-right">
            <Title title="教师月排名" />
-           <List dataSource={data}  />
+           <List dataSource={monthList}  />
         </div>
       </div>
     );
