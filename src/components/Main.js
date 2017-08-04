@@ -6,6 +6,14 @@ import Title from './title';
 import List from './list';
 import Cup from './cup';
 
+const HOST = 'http://106.75.103.94:3000';
+const PARAM = {
+   token: '8C107BD0CADD409AB5CE76B89714A475',
+   personType: 1,
+   schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
+   date: '2016-12-27',
+   pageSize: 10
+}
 class AppComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -33,30 +41,17 @@ class AppComponent extends React.Component {
     return [];
   }
   fetchYestday() {
-    const url = 'http://localhost:3000/steps/day'
-    const params = {
-      token: '8C107BD0CADD409AB5CE76B89714A475',
-      personType: 1,
-      schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
-      date: '2016-12-27',
-      pageSize: 10
-    }
+    const url = `${HOST}/steps/day`
+    const params = Object.assign({pageSize: 3},PARAM)
     request(url, params).then(res => {
-      console.log('yest',res)
       if (res.Code == 0) {
         this.setState({yestdayList: this.initRankData(res.List)})
       }
     })
   }
   fetchDay() {
-    const url = 'http://localhost:3000/steps/day'
-    const params = {
-      token: '8C107BD0CADD409AB5CE76B89714A475',
-      personType: 1,
-      schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
-      date: '2016-12-27',
-      pageSize: 10
-    }
+    const url = `${HOST}/steps/day`
+    const params = Object.assign({},PARAM);
     request(url, params).then(res => {
       if (res.Code == 0) {
         this.setState({dayList: this.initRankData(res.List)})
@@ -64,14 +59,8 @@ class AppComponent extends React.Component {
     })
   }
   fetchWeek() {
-    const url = 'http://localhost:3000/steps/week'
-    const params = {
-      token: '8C107BD0CADD409AB5CE76B89714A475',
-      personType: 1,
-      schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
-      date: '2016-12-27',
-      pageSize: 10
-    }
+    const url = `${HOST}/steps/week`; 
+    const params = Object.assign({},PARAM)
     request(url, params).then(res => {
       if (res.Code == 0) {
         this.setState({weekList: this.initRankData(res.List)})
@@ -79,14 +68,8 @@ class AppComponent extends React.Component {
     })
   }
   fetchMouth() {
-    const url = 'http://localhost:3000/steps/month'
-    const params = {
-      token: '8C107BD0CADD409AB5CE76B89714A475',
-      personType: 1,
-      schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
-      date: '2016-12-27',
-      pageSize: 10
-    }
+    const url = `${HOST}/steps/month`; 
+    const params = Object.assign({},PARAM)
     request(url, params).then(res => {
       if (res.Code == 0) {
         this.setState({monthList: this.initRankData(res.List)})
