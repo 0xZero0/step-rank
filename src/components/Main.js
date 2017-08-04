@@ -1,6 +1,6 @@
 require('normalize.css/normalize.css');
 import 'styles/index.scss';
-
+import fetchAjax from 'lib/fetch';
 import React from 'react';
 import Title from './title';
 import List from './list';
@@ -17,6 +17,21 @@ const data = [
     {name: '赵勇',step: 1000, rank: 9}
     ];
 class AppComponent extends React.Component {
+  componentWillMount() {
+    // const url = 'http://schoolinkapi.ezooo.cn:81/API/Steps/GetStepRanksByDay.ashx';
+    // const url = 'http://schoolinkapi.ezooo.cn:81/API/Steps/GetStepRanksByDay.ashx?token=8C107BD0CADD409AB5CE76B89714A475&personType=1&schoolGuid=F7127394-40A3-4934-9D8E-BDA27BA0AC78&date=2016-12-27&pageSize=10'
+   const url = 'http://localhost:3000/steps/day'
+    const params = {
+      token: '8C107BD0CADD409AB5CE76B89714A475',
+      personType: 1,
+      schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
+      date: '2016-12-27',
+      pageSize: 10
+    }
+    fetchAjax(url, params).then(res => {
+      console.log(res,'00000000000000000');
+    })
+  }
   render() {
     return (
       <div className="sr-containter">
@@ -34,7 +49,7 @@ class AppComponent extends React.Component {
             <div className="bottom">
               <div className="bottom-left">
                 <div className="cup cup-silver">
-                 <div>
+                   <div>
                     <span>王喜东</span>
                     <span>27862步</span>
                    </div>                
