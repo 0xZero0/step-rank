@@ -7,7 +7,8 @@ import List from './list';
 import Cup from './cup';
 
 // const HOST = 'http://106.75.103.94:3000';
-const HOST = 'http://118.190.66.192:60060';
+// const HOST = 'http://118.190.66.192:60061';
+const HOST = 'http://schoolinkapi.ezooo.cn:60061';
 const PARAM = {
    token: '8C107BD0CADD409AB5CE76B89714A475',
    personType: 1,
