@@ -6,9 +6,9 @@ import Title from './title';
 import List from './list';
 import Cup from './cup';
 
-// const HOST = 'http://106.75.103.94:3000';
+const HOST = 'http://47.95.204.85:3000';
 // const HOST = 'http://118.190.66.192:60061';
-const HOST = 'http://schoolinkapi.ezooo.cn:60061';
+// const HOST = 'http://schoolinkapi.ezooo.cn:60061';
 const PARAM = {
    token: '8C107BD0CADD409AB5CE76B89714A475',
    personType: 1,
@@ -61,7 +61,7 @@ class AppComponent extends React.Component {
     })
   }
   fetchWeek() {
-    const url = `${HOST}/steps/week`; 
+    const url = `${HOST}/steps/week`;
     const params = Object.assign({},PARAM)
     request(url, params).then(res => {
       if (res.Code == 0) {
@@ -70,7 +70,7 @@ class AppComponent extends React.Component {
     })
   }
   fetchMouth() {
-    const url = `${HOST}/steps/month`; 
+    const url = `${HOST}/steps/month`;
     const params = Object.assign({},PARAM)
     request(url, params).then(res => {
       if (res.Code == 0) {
