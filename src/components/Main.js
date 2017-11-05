@@ -6,15 +6,14 @@ import Title from './title';
 import List from './list';
 import Cup from './cup';
 
-const HOST = 'http://47.95.204.85:3000';
-// const HOST = 'http://118.190.66.192:60061';
-// const HOST = 'http://schoolinkapi.ezooo.cn:60061';
+const TOKEN = '8C107BD0CADD409AB5CE76B89714A475'
+const DEFAULT_QUERY = {date: '2016-12-27', schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78'}
+
+const PAGE_SIZE = 10
 const PARAM = {
-   token: '8C107BD0CADD409AB5CE76B89714A475',
+   token: TOKEN,
    personType: 1,
-   schoolGuid: 'F7127394-40A3-4934-9D8E-BDA27BA0AC78',
-   date: '2016-12-27',
-   pageSize: 10
+   pageSize: PAGE_SIZE
 }
 class AppComponent extends React.Component {
   constructor(props) {
@@ -25,6 +24,9 @@ class AppComponent extends React.Component {
       weekList: [],
       mounth: []
     }
+    this.query = this.initQueryBody() || DEFAULT_QUERY
+    PARAM.date = this.query.date
+    PARAM.schoolGuid = this.query.schoolGuid
   }
   componentWillMount() {
     this.fetchDay();
@@ -42,37 +44,46 @@ class AppComponent extends React.Component {
     }
     return [];
   }
+  initQueryBody = () => {
+    const searchs = window.location.search.replace('?', '').split('&')
+    let body = {}
+    searchs.forEach(d => {
+      const query = d.split('=')
+      body[query[0]] = query[1]
+    })
+    return body
+  }
   fetchYestday() {
-    const url = `${HOST}/steps/day`
+    // const url = `${HOST}`
     const params = Object.assign({pageSize: 3},PARAM)
-    request(url, params).then(res => {
+    request('/steps/day', params).then(res => {
       if (res.Code == 0) {
         this.setState({yestdayList: this.initRankData(res.List)})
       }
     })
   }
   fetchDay() {
-    const url = `${HOST}/steps/day`
+    // const url = `${HOST}`
     const params = Object.assign({},PARAM);
-    request(url, params).then(res => {
+    request('/steps/day', params).then(res => {
       if (res.Code == 0) {
         this.setState({dayList: this.initRankData(res.List)})
       }
     })
   }
   fetchWeek() {
-    const url = `${HOST}/steps/week`;
+    // const url = `${HOST}`;
     const params = Object.assign({},PARAM)
-    request(url, params).then(res => {
+    request('/steps/week', params).then(res => {
       if (res.Code == 0) {
         this.setState({weekList: this.initRankData(res.List)})
       }
     })
   }
   fetchMouth() {
-    const url = `${HOST}/steps/month`;
+    // const url = `${HOST}`;
     const params = Object.assign({},PARAM)
-    request(url, params).then(res => {
+    request('/steps/month', params).then(res => {
       if (res.Code == 0) {
         this.setState({monthList: this.initRankData(res.List)})
       }

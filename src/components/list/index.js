@@ -17,19 +17,6 @@ class List extends Component {
       return <span className="rank">{rank}</span>;
     }
   }
-  // renderList = () => {
-  //   const { dataSource } = this.props;
-  //   if (Array.isArray(dataSource) && dataSource.length > 0) {
-  //     return dataSource.map((d,i) => (
-  //       <li className="sr-list-item" key={i}>
-  //         <div>{d.name}</div>
-  //         <div>{d.step}步</div>
-  //         <div>{this.setRank(d.rank)}</div>
-  //       </li>
-  //     ))
-  //   }
-  //   return null;
-  // }
   renderList = () => {
     const { dataSource } = this.props;
     if (Array.isArray(dataSource) && dataSource.length > 0) {

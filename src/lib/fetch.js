@@ -1,6 +1,6 @@
 
-
-function _fetch(url = '', params) {
+const HOST = 'http://47.95.204.85:3000';
+function _fetch(url , params) {
   let myHeaders = new Headers();
   myHeaders.append('Accept', 'application/json');
   // myHeaders.append('Access-Control-Allow-Origin', '*');
@@ -11,7 +11,7 @@ function _fetch(url = '', params) {
                  mode: 'cors',
                  cache: 'default'
                };
-  var myRequest = new Request(url, myInit);
+  var myRequest = new Request(HOST + url, myInit);
   return new Promise((resolve, reject) => {
     fetch(myRequest)
      .then(res => {
